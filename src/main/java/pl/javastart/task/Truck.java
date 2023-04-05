@@ -20,14 +20,13 @@ class Truck extends Car {
     }
 
     @Override
-    public double getRange() {
-        double fuelConsumptionWithTruckload = getFuelConsumption()
-                + truckloadWeight / 100 * BONUS_FUEL_CONSUMPTION_PER_100KG_TRUCKLOAD;
-        if (isAirConditioningOn()) {
-            return getFuelTankCapacity() / (fuelConsumptionWithTruckload + BONUS_FUEL_CONSUMPTION_FROM_AC) * 100;
-        } else {
-            return getFuelTankCapacity() / fuelConsumptionWithTruckload * 100;
-        }
+    public double calculateFuelConsumption() {
+        return super.calculateFuelConsumption() + truckloadWeight / 100 * BONUS_FUEL_CONSUMPTION_PER_100KG_TRUCKLOAD;
+    }
+
+    @Override
+    protected double getAcConsumption() {
+        return BONUS_FUEL_CONSUMPTION_FROM_AC;
     }
 
     @Override

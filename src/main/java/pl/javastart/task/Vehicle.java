@@ -2,13 +2,13 @@ package pl.javastart.task;
 
 class Vehicle {
     private String name;
-    private double fuelTankCapacity;
-    private double fuelConsumption;
+    protected double fuelTankCapacity;
+    protected double baseFuelConsumption;
 
-    public Vehicle(String name, double fuelTankCapacity, double fuelConsumption) {
+    public Vehicle(String name, double fuelTankCapacity, double baseFuelConsumption) {
         this.name = name;
         this.fuelTankCapacity = fuelTankCapacity;
-        this.fuelConsumption = fuelConsumption;
+        this.baseFuelConsumption = baseFuelConsumption;
     }
 
     public String getName() {
@@ -27,20 +27,24 @@ class Vehicle {
         this.fuelTankCapacity = fuelTankCapacity;
     }
 
-    public double getFuelConsumption() {
-        return fuelConsumption;
+    public double getBaseFuelConsumption() {
+        return baseFuelConsumption;
     }
 
-    public void setFuelConsumption(double fuelConsumption) {
-        this.fuelConsumption = fuelConsumption;
+    public void setBaseFuelConsumption(double baseFuelConsumption) {
+        this.baseFuelConsumption = baseFuelConsumption;
+    }
+
+    public double calculateFuelConsumption() {
+        return baseFuelConsumption;
     }
 
     public double getRange() {
-        return fuelTankCapacity / fuelConsumption * 100;
+        return fuelTankCapacity / calculateFuelConsumption() * 100;
     }
 
     public String getInfo() {
-        return String.format("Nazwa: %s, pojemność baku: %.2f l, zużycie paliwa na 100 km: %.2f", name,
-                fuelTankCapacity, fuelConsumption);
+        return String.format("Nazwa: %s, pojemność baku: %.2f l, bazowe zużycie paliwa na 100 km: %.2f", name,
+                fuelTankCapacity, baseFuelConsumption);
     }
 }
